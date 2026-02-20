@@ -60,9 +60,11 @@ _G.Config.leader_group_clues = {
   { mode = 'n', keys = '<Leader>s', desc = '+Session' },
   { mode = 'n', keys = '<Leader>t', desc = '+Terminal' },
   { mode = 'n', keys = '<Leader>v', desc = '+Visits' },
+  { mode = 'n', keys = '<Leader>d', desc = '+Debug' },
 
   { mode = 'x', keys = '<Leader>g', desc = '+Git' },
   { mode = 'x', keys = '<Leader>l', desc = '+Language' },
+
 }
 
 -- Helpers for a more concise `<Leader>` mappings.
@@ -154,6 +156,7 @@ nmap_leader('fs', pick_workspace_symbols_live,                  'Symbols workspa
 nmap_leader('fS', '<Cmd>Pick lsp scope="document_symbol"<CR>',  'Symbols document')
 nmap_leader('fv', '<Cmd>Pick visit_paths cwd=""<CR>',           'Visit paths (all)')
 nmap_leader('fV', '<Cmd>Pick visit_paths<CR>',                  'Visit paths (cwd)')
+nmap_leader('fo', '<Cmd>Pick oldfiles<CR>',                  'old files')
 
 -- g is for 'Git'. Common usage:
 -- - `<Leader>gs` - show information at cursor

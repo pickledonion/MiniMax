@@ -101,9 +101,12 @@ now_if_args(function()
   -- the rules provided by 'nvim-lspconfig'.
   -- Use `:h vim.lsp.config()` or 'after/lsp/' directory to configure servers.
   -- Uncomment and tweak the following `vim.lsp.enable()` call to enable servers.
-  -- vim.lsp.enable({
-  --   -- For example, if `lua-language-server` is installed, use `'lua_ls'` entry
-  -- })
+  vim.lsp.enable({
+    'lua-ls'
+  })
+  vim.lsp.enable({
+    'clangd'
+  })
 end)
 
 -- Formatting =================================================================
@@ -128,7 +131,7 @@ later(function()
     },
     -- Map of filetype to formatters
     -- Make sure that necessary CLI tool is available
-    -- formatters_by_ft = { lua = { 'stylua' } },
+    formatters_by_ft = { lua = { 'stylua' }, c = { 'clang-format'} },
   })
 end)
 
@@ -145,6 +148,14 @@ later(function() add('rafamadriz/friendly-snippets') end)
 
 -- Honorable mentions =========================================================
 
+-- 'MeanderingProgrammer/render-markdown.nvim' is a plugin that improves the
+-- visual rendering of markdown files in Neovim. It conceals markdown syntax
+-- and renders it with highlights, making markdown files more readable.
+-- later(function()
+--   add('MeanderingProgrammer/render-markdown.nvim')
+--   require('render-markdown').setup()
+-- end)
+
 -- 'mason-org/mason.nvim' (a.k.a. "Mason") is a great tool (package manager) for
 -- installing external language servers, formatters, and linters. It provides
 -- a unified interface for installing, updating, and deleting such programs.
@@ -153,10 +164,10 @@ later(function() add('rafamadriz/friendly-snippets') end)
 -- If you need them to work elsewhere, consider using other package managers.
 --
 -- You can use it like so:
--- now_if_args(function()
---   add('mason-org/mason.nvim')
---   require('mason').setup()
--- end)
+now_if_args(function()
+  add('mason-org/mason.nvim')
+  require('mason').setup()
+end)
 
 -- Beautiful, usable, well maintained color schemes outside of 'mini.nvim' and
 -- have full support of its highlight groups. Use if you don't like 'miniwinter'

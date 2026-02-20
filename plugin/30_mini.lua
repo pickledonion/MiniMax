@@ -34,13 +34,13 @@ local now_if_args = _G.Config.now_if_args
 -- - `:h mini.nvim-color-schemes` - list of other color schemes
 -- - `:h MiniHues-examples` - how to define highlighting with 'mini.hues'
 -- - 'plugin/40_plugins.lua' honorable mentions - other good color schemes
-now(function() vim.cmd('colorscheme miniwinter') end)
+-- now(function() vim.cmd('colorscheme miniwinter') end)
 
 -- You can try these other 'mini.hues'-based color schemes (uncomment with `gcc`):
 -- now(function() vim.cmd('colorscheme minispring') end)
 -- now(function() vim.cmd('colorscheme minisummer') end)
 -- now(function() vim.cmd('colorscheme miniautumn') end)
--- now(function() vim.cmd('colorscheme randomhue') end)
+now(function() vim.cmd('colorscheme randomhue') end)
 
 -- Common configuration presets. Example usage:
 -- - `<C-s>` in Insert mode - save and go to Normal mode
@@ -447,7 +447,7 @@ later(function() require('mini.diff').setup() end)
 -- - `:h MiniFiles-examples` - examples of common setups
 later(function()
   -- Enable directory/file preview
-  require('mini.files').setup({ windows = { preview = true } })
+  require('mini.files').setup({ windows = { preview = true, width_focus = 30, width_nofocus = 40 } })
 
   -- Add common bookmarks for every explorer. Example usage inside explorer:
   -- - `'c` to navigate into your config directory
@@ -546,11 +546,8 @@ later(function()
   -- Navigate 'mini.completion' menu with `<Tab>` /  `<S-Tab>`
   MiniKeymap.map_multistep('i', '<Tab>', { 'pmenu_next' })
   MiniKeymap.map_multistep('i', '<S-Tab>', { 'pmenu_prev' })
-  -- On `<CR>` try to accept current completion item, fall back to accounting
-  -- for pairs from 'mini.pairs'
-  MiniKeymap.map_multistep('i', '<CR>', { 'pmenu_accept', 'minipairs_cr' })
-  -- On `<BS>` just try to account for pairs from 'mini.pairs'
-  MiniKeymap.map_multistep('i', '<BS>', { 'minipairs_bs' })
+  -- On `<CR>` try to accept current completion item
+  MiniKeymap.map_multistep('i', '<CR>', { 'pmenu_accept' })
 end)
 
 -- Window with text overview. It is displayed on the right hand side. Can be used
@@ -626,18 +623,11 @@ later(function()
   vim.keymap.set('n', ')', 'gxiagxina', { remap = true, desc = 'Swap arg right' })
 end)
 
--- Autopairs functionality. Insert pair when typing opening character and go over
--- right character if it is already to cursor's right. Also provides mappings for
--- `<CR>` and `<BS>` to perform extra actions when inside pair.
--- Example usage in Insert mode:
--- - `(` - insert "()" and put cursor between them
--- - `)` when there is ")" to the right - jump over ")" without inserting new one
--- - `<C-v>(` - always insert a single "(" literally. This is useful since
---   'mini.pairs' doesn't provide particularly smart behavior, like auto balancing
-later(function()
-  -- Create pairs not only in Insert, but also in Command line mode
-  require('mini.pairs').setup({ modes = { command = true } })
-end)
+-- Autopairs functionality is disabled
+-- To re-enable, uncomment the following block:
+-- later(function()
+--   require('mini.pairs').setup({ modes = { command = true } })
+-- end)
 
 -- Pick anything with single window layout and fast matching. This is one of
 -- the main usability improvements as it powers a lot of "find things quickly"
@@ -779,7 +769,7 @@ later(function() require('mini.surround').setup() end)
 -- Highlight and remove trailspace. Temporarily stops highlighting in Insert mode
 -- to reduce noise when typing. Example usage:
 -- - `<Leader>ot` - trim all trailing whitespace in a buffer
-later(function() require('mini.trailspace').setup() end)
+-- later(function() require('mini.trailspace').setup() end)
 
 -- Track and reuse file system visits. Every file/directory visit is persistently
 -- tracked on disk to later reuse: show in special frecency order, etc. It also
