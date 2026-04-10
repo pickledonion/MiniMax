@@ -107,7 +107,12 @@ local explore_quickfix = function()
   vim.cmd(vim.fn.getqflist({ winid = true }).winid ~= 0 and 'cclose' or 'copen')
 end
 local explore_locations = function()
-  vim.cmd(vim.fn.getloclist(0, { winid = true }).winid ~= 0 and 'lclose' or 'lopen')
+  if vim.fn.getloclist(0, { winid = true }).winid ~= 0 then
+    vim.cmd('lclose')
+    return
+  end
+
+  vim.diagnostic.setloclist({ open = true })
 end
 
 nmap_leader('ed', '<Cmd>lua MiniFiles.open()<CR>',          'Directory')
