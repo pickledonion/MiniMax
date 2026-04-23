@@ -107,6 +107,9 @@ now_if_args(function()
   vim.lsp.enable({
     'clangd'
   })
+  vim.lsp.enable({
+    'pyright'
+  })
 end)
 
 -- Formatting =================================================================
@@ -131,7 +134,7 @@ later(function()
     },
     -- Map of filetype to formatters
     -- Make sure that necessary CLI tool is available
-    formatters_by_ft = { lua = { 'stylua' }, c = { 'clang-format'} },
+    formatters_by_ft = { lua = { 'stylua' }, c = { 'clang-format' }, python = { 'ruff_format' } },
   })
 end)
 
